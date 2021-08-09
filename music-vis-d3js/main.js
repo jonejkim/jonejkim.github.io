@@ -6,8 +6,12 @@ $(document).ready(function () {
 
     let svg = ((parent, height, width) => {
             return d3.select('#musicVis').append('svg').attr({
-                'width': width,
-                'height': height});
+                'id' : "musicVisSvg",
+                // 'width': width,
+                // 'height': height,
+                'viewBox': "0 0 " + width + " " + height,
+                'preserveAspectRatio': "xMidYMid meet"
+            });
         })('body', svgh, svgw)
 
     //====[ Append SVG Subgroup Elements ]====//
@@ -101,8 +105,6 @@ $(document).ready(function () {
     // Main - Realtime Rendering
     //
 
-
-
     function renderSvg() {
         requestAnimationFrame(renderSvg);
 
@@ -186,7 +188,61 @@ $(document).ready(function () {
     //     }
     // });
 
-    document.documentElement.addEventListener("mousedown", function(){
+
+    // if ($('#collapseTwo').attr('aria-expanded') == "false") {$('#collapseTwo').collapse('show');}
+
+
+    // $('#musicVisSvg').
+
+    // $('#explainBtn').click(function () {
+    //     // if ($('#explain').is( ":visible" )){
+    //         console.log('123123123')
+    //     if ($('#explainBtn').attr("aria-expanded") == 'true'){
+    //         svg.selectAll('.explainOverlay').remove()
+    //         console.log('456')
+
+    //     }else{
+    //         console.log('789')
+    //         svg.append('rect')
+    //             .classed('explainOverlay', true)
+    //             .attr({
+    //                 'x': 0,
+    //                 'y': 0,
+    //                 'width': svgw,
+    //                 'height': svgh,
+    //                 'fill' : 'rgba(255,255,255,0.1)'
+    //             })
+    //         g_masterVol.append('text')
+    //             .classed('explainOverlay', true)
+    //             .text('1')
+    //             .attr({
+    //                 'transform' : 'translate(' + masterVolw/2 + ', ' + masterVolh/2 + ')'
+    //             })
+    //         g_masterWav.append('text')
+    //             .classed('explainOverlay', true)
+    //             .text('2')
+    //             .attr({
+    //                 'transform' : 'translate(' + masterWavw/2 + ', ' + masterWavh/2 + ')'
+    //             })
+    //         g_decompVol.append('text')
+    //             .classed('explainOverlay', true)
+    //             .text('3')
+    //             .attr({
+    //                 'transform' : 'translate(' + decompVolw/2 + ', ' + decompVolh/2 + ')'
+    //             })
+    //         g_decompWav.append('text')
+    //             .classed('explainOverlay', true)
+    //             .text('4')
+    //             .attr({
+    //                 'transform' : 'translate(' + decompWavw/2 + ', ' + decompWavh/2 + ')'
+    //             })
+
+    //     }
+    // })
+
+
+
+    $(document).on("mousedown", function(){
         // mitigation for chrome gesture warning "AudioContext was not allowed to start"
         audioCtx.resume();
     })

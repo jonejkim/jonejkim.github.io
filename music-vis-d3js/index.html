@@ -5,9 +5,11 @@
     <title>Music Visualization</title>
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
+
+    <!-- bootstrap overrides -->
     <style>
         body {
             /* background-color: rgb(0,0,0); */
@@ -21,6 +23,15 @@
             stroke-width: 2;
             fill: none
         }
+
+        .accordion{
+            accordion-padding-y: 5rem;
+        }
+        .accordion-header-text{
+            width: 100%;
+            text-align: center
+        }
+
     </style>
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -35,39 +46,82 @@
         [ <a href="https://vectors-of-qualia.net">Home</a> ] [ <a href="https://github.com/jonejkim/jonejkim.github.io/tree/master/music-vis-d3js">Code</a> ]
         <br>
         <h3>Music Visualization</h3>
-        Powered by D3.js
-        <br>
 
-        <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#whatIsThis">What is this?</button><br>
+        <button type="button" class="btn btn-light" data-bs-toggle="collapse" data-bs-target="#whatIsThis">What is this?</button><br>
         <div id="whatIsThis" class="collapse">
 
-            Visualizes the idea of Discrete Fourier Transform with music signals.<br>
+            <dd>This app attempts to visualize the idea of Discrete Fourier Transform intuitively with music signals.</dd>
 
-            <a href="https://en.wikipedia.org/wiki/Frequency_domain"><img src="assets/fourier.gif"></a><br>
+            <div class="accordion" style="max-width: 50%;" id="whatIsThisAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-h1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-c1" aria-expanded="false" aria-controls="flush-c1">
+                            <div class="accordion-header-text">How?</div>
+                        </button>
+                    </h2>
+                    <div id="flush-c1" class="accordion-collapse collapse" aria-labelledby="flush-h1" >
+                        <div class="accordion-body" >
+                            A skim through on <a href="https://en.wikipedia.org/wiki/DFT_matrix">DFT Matrix</a> may give you a good idea of how the first principle of Discrete Fourier Transforms work. <br>
+                            <img class="img-fluid" src="assets/fourier.gif"><br>
+                            <img class="img-fluid" src="assets/DFTmatrix.png">
 
-            <!-- <button type="button" class="btn btn-link" id="explain">Explain for me.</button><br> -->
-
-            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#why">Why?</button><br>
-            <div id="why" class="collapse">
-                Music players with visualizations are fun to look at because it is aesthetically pleasing. Being an engineer with knowledge of Fourier Tansforms and its relationship to audio signal processing, I was trying to find a visualization that catches both of aesthetic and mathematical visualization of music, but was not able to find one within my reach. So I created one myself for the sake of fun and practice.
-            </div>
-
-            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#limitations">Limitations</button><br>
-            <div id="limitations" class="collapse">
-                This app uses Web Audio API that does not provide phase/angle information on the complex number output of FFT. Only magnitudes. Therefore fully reconstructing the decomposed frequency components into corresponding waveforms was not possible with this API. Therefore the decomposed waveforms are being arbitrarily induced of oscillating visual effect over time using <a href="https://en.wikipedia.org/wiki/Low-frequency_oscillation">Low Frequency Oscillators (LFO)</a>.
-            </div>
-
+                        </div>
+                    </div>
+                    <h2 class="accordion-header" id="flush-h2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-c2" aria-expanded="false" aria-controls="flush-c2">
+                            <div class="accordion-header-text">Why?</div>
+                        </button>
+                    </h2>
+                    <div id="flush-c2" class="accordion-collapse collapse" aria-labelledby="flush-h2" >
+                        <div class="accordion-body" >
+                            Music players with visualizations are fun to look at because it is aesthetically pleasing. Being an engineer with knowledge of Fourier Tansforms and its relationship to audio signal processing, I was trying to find a visualization that catches both of aesthetic and mathematical visualization of music, but was not able to find one within my reach. So I created one myself for the sake of fun and practice.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-h3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-c3" aria-expanded="false" aria-controls="flush-c3" text-center>
+                            <div class="accordion-header-text">
+                                Limitations
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="flush-c3" class="accordion-collapse collapse" aria-labelledby="flush-h3" >
+                        <div class="accordion-body">
+                            <dd>This app uses Web Audio API that does not provide phase/angle information on the complex number output of FFT. Only magnitudes. Therefore fully reconstructing the decomposed frequency components into corresponding waveforms was not possible with this API. Therefore the decomposed waveforms are being arbitrarily induced of oscillating visual effect over time using <a href="https://en.wikipedia.org/wiki/Low-frequency_oscillation">Low Frequency Oscillators (LFO)</a>.</dd>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-h4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-c4" aria-expanded="false" aria-controls="flush-c4">
+                            <div class="accordion-header-text">
+                                Credits
+                            </div>
+                        </button>
+                    </h2>
+                    <div id="flush-c4" class="accordion-collapse collapse" aria-labelledby="flush-h4" >
+                        <div class="accordion-body">
+                            <dd><a href="https://en.wikipedia.org/wiki/Frequency_domain">Fourier Transform GIF - Wikiepedia</a></dd>
+                            <dd><a href="https://en.wikipedia.org/wiki/DFT_matrix">DFT Matrix - Wikiepedia</a></dd>
+                            <dd>App powered by D3.js, Bootstrap 5</dd>
+                        </div>
+                    </div>
+                    </div>
+              </div>
             <br>
         </div>
-        Music from: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a>
+        Sample Music: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a>
         <div>
-            <button onclick="document.getElementById('audioElem').play()">　　▶　　</button>
-            <button onclick="document.getElementById('audioElem').pause()">　　⏸　　</button>
-            <button onclick="document.getElementById('audioElem').volume+=0.1">Vol ⏶︎</button>
-            <button onclick="document.getElementById('audioElem').volume-=0.1">Vol ⏷︎</button>
+            <button class="btn btn-light" onclick="document.getElementById('audioElem').play()">　▶　</button>
+            <button class="btn btn-light" onclick="document.getElementById('audioElem').pause()">　⏸　</button>
+            <button class="btn btn-light" onclick="document.getElementById('audioElem').volume+=0.1">Vol ⏶︎</button>
+            <button class="btn btn-light" onclick="document.getElementById('audioElem').volume-=0.1">Vol ⏷︎</button>
         </div>
         <br>
         <div id="musicVis"></div>
+        <br>
+        <br>
     </div>
 
 

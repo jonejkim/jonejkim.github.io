@@ -18,7 +18,10 @@ const maxDecibels = -10
 
 // whether to omit first frequency bin (DC offset) or not.
 const omitDCFrqBin = true
-const skipDCBin = ((omitDCFrqBin) => omitDCFrqBin? 1 : 0)(omitDCFrqBin)
+const skipDCBin = omitDCFrqBin? 1 : 0
+
+const useCosinePhaseShift = true
+const cosinePhaseShift = useCosinePhaseShift? (Math.PI/2) : 0
 
 //==================================//
 // SVG

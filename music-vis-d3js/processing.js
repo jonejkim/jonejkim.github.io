@@ -14,8 +14,8 @@ analyser.maxDecibels = maxDecibels
 audioSrc.connect(analyser);
 audioSrc.connect(audioCtx.destination); //
 
-let fSmp = audioCtx.sampleRate
-let fNyq = fSmp / 2
+let fSmp = audioCtx.sampleRate  // sampling frequency
+let fNyq = fSmp / 2             // Nyquist frequency
 
 //==================================//
 // arrays to fetch audio data
@@ -105,10 +105,9 @@ function frqMag2wav (frqMag, frqBin) {
     let lfoVal = getLFO(frqBin)
 
     cos = ((frqVal, frqNorm) => {
-        return fftWindowIdxs.map((tIdx) => lfoVal* frqVal * -Math.cos(2*Math.PI*frqNorm*tIdx))
+        return fftWindowIdxs.map((tIdx) => lfoVal* frqVal * -Math.cos(2*Math.PI*frqNorm*tIdx + cosinePhaseShift))
     })(frqMag, frqNorm)
 
-    // console.log(cos[12])
     return cos
 }
 
