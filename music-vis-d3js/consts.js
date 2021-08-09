@@ -23,6 +23,10 @@ const skipDCBin = omitDCFrqBin? 1 : 0
 const useCosinePhaseShift = true
 const cosinePhaseShift = useCosinePhaseShift? (Math.PI/2) : 0
 
+// how much to speed up on LFO oscillation
+// 0 eliminates LFO effect
+const LFOSpeedFactor = 2.0
+
 //==================================//
 // SVG
 //

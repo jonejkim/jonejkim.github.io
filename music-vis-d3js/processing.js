@@ -91,7 +91,7 @@ function calculate_masterVol() {
 function getLFO (frqBin) {
     // Low Frequency Oscillator for standing wave effect
     let ctxTime = audioCtx.getOutputTimestamp().contextTime
-    let LFOPeriodSec = 1/(frqBin*16)
+    let LFOPeriodSec = 1/(frqBin*LFOSpeedFactor)
     let frqNorm = (ctxTime % LFOPeriodSec) / LFOPeriodSec
     return Math.cos(2*Math.PI*frqNorm)
 }
@@ -101,7 +101,6 @@ function frqMag2wav (frqMag, frqBin) {
     frqMag = (frqMag / 255) // need uint8 conversion for now
     let frqNorm = frqBin/nFFT
 
-    let frqHz = frqNorm * fSmp
     let lfoVal = getLFO(frqBin)
 
     cos = ((frqVal, frqNorm) => {
