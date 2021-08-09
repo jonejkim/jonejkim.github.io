@@ -19,7 +19,7 @@ const maxDecibels = -10
 // SVG
 //
 const svgh = 1000*0.75;
-const svgw = 1200*0.75;
+const svgw = 1000*0.75;
 
 //==================================//
 // SVG Subgroup Outline
@@ -29,8 +29,8 @@ const svgw = 1200*0.75;
 // rest of the other quadrants soley depend on this quadrant.
 const masterVolx = 0
 const masterVoly = 0
-const masterVolw = 0.05*svgw
-const masterVolh = 0.15*svgh
+const masterVolw = 0.50*svgw
+const masterVolh = 0.50*svgh
 
 //====[ masterWav - top right quadrant ]====//
 const masterWavx = masterVolx + masterVolw

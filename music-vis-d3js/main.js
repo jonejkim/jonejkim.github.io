@@ -146,12 +146,12 @@ $(document).ready(function () {
             // d 패러미터는 각 data의 값인듯
             .attr({
                 'x': (d) => {
-                    return 0
-                    // return decompVolw - (d/255)*decompVolw
+                    // return 0
+                    return decompVolw - (d/255)*decompVolw
                 },
                 'width': (d) => {
-                    return decompVolw
-                    // return (d/255)*decompVolw
+                    // return decompVolw
+                    return (d/255)*decompVolw
                 },
                 'fill': (d) => {
                     let color = String(uint8ColorMap(parseInt(d)))
