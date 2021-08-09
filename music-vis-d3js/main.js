@@ -101,12 +101,13 @@ $(document).ready(function () {
     // Main - Realtime Rendering
     //
 
+
+
     function renderSvg() {
         requestAnimationFrame(renderSvg);
 
         analyser.getFloatTimeDomainData(temporalData)
         analyser.getByteFrequencyData(frequencyData);
-
 
         //====[ update masterVol ]====/
         let current_masterVol = calculate_masterVol()

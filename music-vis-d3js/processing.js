@@ -53,7 +53,7 @@ const masterWavLineFunc = d3.svg.line()
 
 //----[ decompWav d3 scales ]----//
 
-const decompWavLineFuncs = Array.from({length: nDecomp} , (xxx, idx) =>
+const decompWavLineFuncs = Array.from({length: nDecomp} , (dummy, frqBin) =>
 
     d3.svg.line()
         .x(function(d) {
@@ -64,7 +64,7 @@ const decompWavLineFuncs = Array.from({length: nDecomp} , (xxx, idx) =>
         .y(function(d) {
             return d3.scale.linear()
                 .domain([-1.0, 1.0])
-                .range([idx*decompWav_barh, idx*decompWav_barh+decompWav_barh])(d[1]);
+                .range([frqBin*decompWav_barh, frqBin*decompWav_barh+decompWav_barh])(d[1]);
         }).interpolate('basis')
 )
 
@@ -88,10 +88,10 @@ function calculate_masterVol() {
 
 //----[ calculations for decompWav ]----//
 
-function getLFO (frqHz) {
+function getLFO (frqBin) {
     // Low Frequency Oscillator for standing wave effect
     let ctxTime = audioCtx.getOutputTimestamp().contextTime
-    let LFOPeriodSec = 1/8
+    let LFOPeriodSec = 1/(frqBin*16)
     let frqNorm = (ctxTime % LFOPeriodSec) / LFOPeriodSec
     return Math.cos(2*Math.PI*frqNorm)
 }
@@ -102,7 +102,7 @@ function frqMag2wav (frqMag, frqBin) {
     let frqNorm = frqBin/nFFT
 
     let frqHz = frqNorm * fSmp
-    let lfoVal = getLFO(frqHz)
+    let lfoVal = getLFO(frqBin)
 
     cos = ((frqVal, frqNorm) => {
         return fftWindowIdxs.map((tIdx) => lfoVal* frqVal * -Math.cos(2*Math.PI*frqNorm*tIdx))
@@ -114,7 +114,7 @@ function frqMag2wav (frqMag, frqBin) {
 
 function get_decompWavxys () {
     return Array.from({length: nDecomp}, (xxx,frqBin) => {
-        return pairStaticx2ys(frqMag2wav(frequencyData[frqBin], frqBin))
+        return pairStaticx2ys(frqMag2wav(frequencyData[frqBin+skipDCBin], frqBin+skipDCBin))
     })
 }
 
@@ -122,6 +122,7 @@ function get_decompWavxys () {
 // Misc
 //
 function uint8ColorMap (val) {
+    // return val
     return 255 - val
 }
 

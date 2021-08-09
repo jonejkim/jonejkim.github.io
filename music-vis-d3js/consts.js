@@ -1,10 +1,11 @@
 //==================================//
 // Audio Analyzer Configs
 //
-const nFFT = 64
+// many of parameters can be adjusted here
+const nFFT = 128
 const nNyq = nFFT/2
 
-const nDecomp = 32  // how many frequencies decomposed to actually plot.
+const nDecomp = 15  // how many frequencies decomposed to actually plot.
                     // should be smaller or equal to nNyq
 
 const nNyqDecomp_ratio = nNyq / nDecomp // used for compensating for omitted frequency bins.
@@ -14,6 +15,8 @@ const fftWindowIdxs = [...Array(nFFT).keys()];
 const minDecibels = -70
 const maxDecibels = -10
 
+const omitDCFrqBin = true
+const skipDCBin = ((omitDCFrqBin) => omitDCFrqBin? 1 : 0)(omitDCFrqBin)
 
 //==================================//
 // SVG
@@ -29,8 +32,8 @@ const svgw = 1000*0.75;
 // rest of the other quadrants soley depend on this quadrant.
 const masterVolx = 0
 const masterVoly = 0
-const masterVolw = 0.25*svgw
-const masterVolh = 0.25*svgh
+const masterVolw = 0.5*svgw
+const masterVolh = 0.5*svgh
 
 //====[ masterWav - top right quadrant ]====//
 const masterWavx = masterVolx + masterVolw
