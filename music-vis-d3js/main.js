@@ -175,16 +175,16 @@ $(document).ready(function () {
     }
     renderSvg();
 
-    window.addEventListener('keydown', (e) => {
-        if (e.code === "Space") {
-            let audioElem = document.getElementById('audioElem')
-            if (audioElem.paused){
-                audioElem.play()
-            }else{
-                audioElem.pause()
-            }
-        }
-    });
+    // window.addEventListener('keydown', (e) => {
+    //     if (e.code === "Space") {
+    //         let audioElem = document.getElementById('audioElem')
+    //         if (audioElem.paused){
+    //             audioElem.play()
+    //         }else{
+    //             audioElem.pause()
+    //         }
+    //     }
+    // });
 
     document.documentElement.addEventListener("mousedown", function(){
         // mitigation for chrome gesture warning "AudioContext was not allowed to start"

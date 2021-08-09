@@ -21,8 +21,10 @@ const skipDCBin = ((omitDCFrqBin) => omitDCFrqBin? 1 : 0)(omitDCFrqBin)
 //==================================//
 // SVG
 //
-const svgh = 1000*0.75;
-const svgw = 1000*0.75;
+const svgw = document.getElementById("outermost").clientWidth
+const svgh = document.getElementById("outermost").clientWidth
+// const svgw = 1000*0.75;
+// const svgh = 1000*0.75;
 
 //==================================//
 // SVG Subgroup Outline
