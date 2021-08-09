@@ -1,0 +1,56 @@
+body {
+    /* background-color: rgb(0,0,0); */
+    background-color: rgb(255,255,255);
+}
+.masterWav {
+    stroke-width: 5;
+    fill: none
+}
+.decompWav {
+    stroke-width: 2;
+    fill: none
+}
+.accordion-header-text{
+    width: 100%;
+    text-align: center
+}
+.btn-light {
+    background-color: #e9ecef
+}
+.btn-light:hover{
+    background-color: #e9ecef
+}
+
+#outermost{
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#musicVis{
+    max-width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    /* align-items: center;; */
+}
+
+/* mobile general */
+@media screen
+and (orientation: portrait) {
+
+    #outermost{
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #musicVis{
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;;
+    }
+    #whatIsThisButton{
+
+    }
+
+}
