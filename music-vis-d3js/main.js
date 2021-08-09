@@ -185,4 +185,9 @@ $(document).ready(function () {
         }
     });
 
+    document.documentElement.addEventListener("mousedown", function(){
+        // mitigation for chrome gesture warning "AudioContext was not allowed to start"
+        audioCtx.resume();
+    })
+
 });
