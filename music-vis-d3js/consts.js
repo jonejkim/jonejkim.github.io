@@ -29,8 +29,8 @@ const svgw = 1000*0.75;
 // rest of the other quadrants soley depend on this quadrant.
 const masterVolx = 0
 const masterVoly = 0
-const masterVolw = 0.50*svgw
-const masterVolh = 0.50*svgh
+const masterVolw = 0.25*svgw
+const masterVolh = 0.25*svgh
 
 //====[ masterWav - top right quadrant ]====//
 const masterWavx = masterVolx + masterVolw
