@@ -31,6 +31,7 @@
     <audio id="audioElem" src="./assets/kubbiJam.mp3" crossorigin="anonymous" ></audio>
 
     <div id="outermost" align="center" style="max-width: 75%; margin-left: auto; margin-right: auto;">
+        <br>
         [ <a href="https://vectors-of-qualia.net">Home</a> ] [ <a href="https://github.com/jonejkim/jonejkim.github.io/tree/master/music-vis-d3js">Code</a> ]
         <br>
         <h3>Music Visualization</h3>
@@ -39,13 +40,23 @@
 
         <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#whatIsThis">What is this?</button><br>
         <div id="whatIsThis" class="collapse">
-            Visualizes the idea of Discrete Fourier Transform from music waveform signals (in a friendly way..)<br>
+
+            Visualizes the idea of Discrete Fourier Transform with music signals.<br>
+
             <a href="https://en.wikipedia.org/wiki/Frequency_domain"><img src="assets/fourier.gif"></a><br>
+
             <!-- <button type="button" class="btn btn-link" id="explain">Explain for me.</button><br> -->
+
             <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#why">Why?</button><br>
             <div id="why" class="collapse">
-                Music players with visualizations are fun to look at because it is aesthetically pleasing. Being an engineer with understanding of Fourier Tansforms and its relationship to audio signal processing, I was trying to find a visualization that catches both mathematical and aesthetic visualization of music, but was not able to find within my reach. So I created one myself for the sake of fun.
+                Music players with visualizations are fun to look at because it is aesthetically pleasing. Being an engineer with knowledge of Fourier Tansforms and its relationship to audio signal processing, I was trying to find a visualization that catches both of aesthetic and mathematical visualization of music, but was not able to find one within my reach. So I created one myself for the sake of fun and practice.
             </div>
+
+            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#limitations">Limitations</button><br>
+            <div id="limitations" class="collapse">
+                This app uses Web Audio API that does not provide phase/angle information on the complex number output of FFT. Only magnitudes. Therefore fully reconstructing the decomposed frequency components into corresponding waveforms was not possible with this API. Therefore the decomposed waveforms are being arbitrarily induced of oscillating visual effect over time using <a href="https://en.wikipedia.org/wiki/Low-frequency_oscillation">Low Frequency Oscillators (LFO)</a>.
+            </div>
+
             <br>
         </div>
         Music from: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a>

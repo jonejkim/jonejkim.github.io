@@ -1,9 +1,10 @@
 //==================================//
 // Audio Analyzer Configs
 //
-// many of parameters can be adjusted here
-const nFFT = 128
-const nNyq = nFFT/2
+
+// many of significant parameters can be adjusted here
+const nFFT = 128        // number of values to be used in the window of Fast Fourier Transform
+const nNyq = nFFT/2     // number of nyquist bins is half of FFT window
 
 const nDecomp = 15  // how many frequencies decomposed to actually plot.
                     // should be smaller or equal to nNyq
@@ -15,6 +16,7 @@ const fftWindowIdxs = [...Array(nFFT).keys()];
 const minDecibels = -70
 const maxDecibels = -10
 
+// whether to omit first frequency bin (DC offset) or not.
 const omitDCFrqBin = true
 const skipDCBin = ((omitDCFrqBin) => omitDCFrqBin? 1 : 0)(omitDCFrqBin)
 

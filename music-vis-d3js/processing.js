@@ -20,7 +20,7 @@ let fNyq = fSmp / 2
 //==================================//
 // arrays to fetch audio data
 //
-let temporalData = new Float32Array(analyser.fftSize); // size of nFFT
+let temporalData = new Float32Array(analyser.fftSize);          // size of nFFT
 let frequencyData = new Uint8Array(analyser.frequencyBinCount); // size of nFFT/2
 
 //==================================//
