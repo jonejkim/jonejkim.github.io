@@ -18,8 +18,8 @@ const maxDecibels = -10
 //==================================//
 // SVG
 //
-const svgh = 1000;
-const svgw = 1200;
+const svgh = 1000*0.75;
+const svgw = 1200*0.75;
 
 //==================================//
 // SVG Subgroup Outline

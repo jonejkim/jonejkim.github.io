@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>D3.js Music Visualization</title>
-    <link rel="icon" type="image/png" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
@@ -27,9 +27,11 @@
 </head>
 
 <body>
-    <audio id="audioElem" src="./audio/kubbiJam.mp3" crossorigin="anonymous" ></audio>
+    <audio id="audioElem" src="./assets/kubbiJam.mp3" crossorigin="anonymous" ></audio>
 
-    <p>Music from: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright 8-bit Music)</a></p>
+    <b>D3.js Music Visualization</b> (<a href="https://github.com/jonejkim/jonejkim.github.io/tree/master/music-vis-d3js">Code</a>)
+    <br>
+    Music: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a>
     <div>
         <button onclick="document.getElementById('audioElem').play()">▶</button>
         <button onclick="document.getElementById('audioElem').pause()">⏸</button>
