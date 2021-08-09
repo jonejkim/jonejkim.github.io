@@ -1,7 +1,7 @@
 //==================================//
 // Audio Analyzer Configs
 //
-const nFFT = 128
+const nFFT = 64
 const nNyq = nFFT/2
 
 const nDecomp = 32  // how many frequencies decomposed to actually plot.

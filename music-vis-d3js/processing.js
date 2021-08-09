@@ -4,8 +4,6 @@
 
 let audioCtx = new (window.webkitAudioContext || window.AudioContext)();
 let audioElem = document.getElementById('audioElem');
-
-// 컨텍스트에 html doc에 있는 오디오 엘레먼트를 넣어 그에 관한 src와 analyser를 추출
 let audioSrc = audioCtx.createMediaElementSource(audioElem);
 
 let analyser = audioCtx.createAnalyser();
