@@ -24,7 +24,6 @@
 </head>
 
 <body>
-    <audio id="audioElem" src="./assets/kubbiJam.mp3" crossorigin="anonymous" ></audio>
 
     <div id="outermost" class="container-fluid" align="center">
         <br>
@@ -89,6 +88,7 @@
                     </h2>
                     <div id="flush-c4" class="accordion-collapse collapse" aria-labelledby="flush-h4" >
                         <div class="accordion-body">
+                            <dd><a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Sample Music: Kubbi - Up In My Jam (No Copyright Music)</a></dd>
                             <dd><a href="https://en.wikipedia.org/wiki/Frequency_domain">Fourier Transform GIF - Wikiepedia</a></dd>
                             <dd><a href="https://en.wikipedia.org/wiki/DFT_matrix">DFT Matrix - Wikiepedia</a></dd>
                             <dd>App powered by D3.js and Bootstrap 5</dd>
@@ -100,12 +100,23 @@
 
         </div>
 
-        Sample Music: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a>
+
+        <div id="sampleMusicInfo">
+            Sample Music: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a><br>
+            ... or ...
+        </div>
+
+        <div id="fileInputArea" class="input-group input-group-sm mb-3">
+            <!-- <label for="audioFileInput" class="input-group-text" >Load your own</label> -->
+            <input id="audioFileInput" type="file" class="form-control form-control-sm" accept="audio/*">
+        </div>
+
+        <audio id="audioElem" src="./assets/kubbiJam.mp3" crossorigin="anonymous" ></audio>
         <div class="playerUI">
-            <button class="btn btn-light" onclick="document.getElementById('audioElem').play()">　▶　</button>
-            <button class="btn btn-light" onclick="document.getElementById('audioElem').pause()">　⏸　</button>
-            <button class="btn btn-light" onclick="document.getElementById('audioElem').volume+=0.1">Vol ⏶︎</button>
-            <button class="btn btn-light" onclick="document.getElementById('audioElem').volume-=0.1">Vol ⏷︎</button>
+            <button class="btn btn-light" onclick="audioElem.play()">　▶　</button>
+            <button class="btn btn-light" onclick="audioElem.pause()">　⏸　</button>
+            <button class="btn btn-light" onclick="audioElem.volume+=0.1">Vol ⏶︎</button>
+            <button class="btn btn-light" onclick="audioElem.volume-=0.1">Vol ⏷︎</button>
         </div>
         <br>
         <div id="musicVis"></div>
@@ -115,8 +126,8 @@
     </div>
 
 
-    <script src="consts.js"></script>
-    <script src="processing.js"></script>
+    <script src="constants.js"></script>
+    <script src="audioProcess.js"></script>
     <script src="hoverEvent.js"></script>
     <script type="module" src="main.js"></script>
 

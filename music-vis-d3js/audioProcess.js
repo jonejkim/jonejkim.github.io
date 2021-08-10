@@ -3,25 +3,26 @@
 //
 
 let audioCtx = new (window.webkitAudioContext || window.AudioContext)();
-let audioElem = document.getElementById('audioElem');
-let audioSrc = audioCtx.createMediaElementSource(audioElem);
 
 let analyser = audioCtx.createAnalyser();
 analyser.fftSize = nFFT
-analyser.minDecibels = minDecibels
-analyser.maxDecibels = maxDecibels
+// analyser.minDecibels = minDecibels
+// analyser.maxDecibels = maxDecibels
+
+let audioSrc = audioCtx.createMediaElementSource(audioElem);
 
 audioSrc.connect(analyser);
 audioSrc.connect(audioCtx.destination); //
 
-let fSmp = audioCtx.sampleRate  // sampling frequency
-let fNyq = fSmp / 2             // Nyquist frequency
+let temporalData = new Float32Array(analyser.fftSize);          // size of nFFT
+let frequencyData = new Uint8Array(analyser.frequencyBinCount); // size of nFFT/2
+
+let fSmp = audioCtx.sampleRate
 
 //==================================//
 // arrays to fetch audio data
 //
-let temporalData = new Float32Array(analyser.fftSize);          // size of nFFT
-let frequencyData = new Uint8Array(analyser.frequencyBinCount); // size of nFFT/2
+
 
 //==================================//
 // Create d3 Axes
@@ -75,7 +76,7 @@ const decompWavLineFuncs = Array.from({length: nDecomp} , (dummy, frqBin) =>
 //----[ calculations for masterVol ]----//
 function calculate_masterVol() {
     // sum of all frequency component magnitudes
-    return (frequencyData.reduce((accm,val)=> accm + val) / nNyq) * nNyqDecomp_ratio
+    return d3.range(0, nNyq).reduce((accm,idx) => accm + frequencyData[idx]) / nNyq
 }
 
 //----[ calculations for masterWav ]----//

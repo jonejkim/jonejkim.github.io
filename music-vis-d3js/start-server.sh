@@ -1,6 +1,6 @@
 #/bin/bash
 
-# for testing on local area network or localhost
+# simple http-server for testing on local area network or localhost
 
 expose_to_lan() {
     # use this to expose webpage access to other computers in Local Area Network

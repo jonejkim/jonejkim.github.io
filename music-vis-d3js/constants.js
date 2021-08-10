@@ -9,12 +9,10 @@ const nNyq = nFFT/2     // number of nyquist bins is half of FFT window
 const nDecomp = 15  // how many frequencies decomposed to actually plot.
                     // should be smaller or equal to nNyq
 
-const nNyqDecomp_ratio = nNyq / nDecomp // used for compensating for omitted frequency bins.
-
 const fftWindowIdxs = [...Array(nFFT).keys()];
 
-const minDecibels = -70
-const maxDecibels = -10
+const minDecibels = -100
+const maxDecibels = 0
 
 // whether to omit first frequency bin (DC offset) or not.
 const omitDCFrqBin = true

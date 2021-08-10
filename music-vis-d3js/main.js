@@ -245,4 +245,19 @@ $(document).ready(function () {
         audioCtx.resume();
     })
 
+    audioFileInput.onchange = function(){
+        var files = this.files;
+        var file = URL.createObjectURL(files[0]);
+        audioElem.src = file;
+
+        audioSrc = audioCtx.createMediaElementSource(audioElem);
+        analyser = audioCtx.createAnalyser();
+        audioSrc.connect(analyser);
+        audioSrc.connect(audioCtx.destination); //
+
+        sampleMusicInfo.hidden = true
+
+
+      };
+
 });
