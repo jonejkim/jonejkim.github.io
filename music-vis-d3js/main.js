@@ -252,11 +252,13 @@ $(document).ready(function () {
 
         audioSrc = audioCtx.createMediaElementSource(audioElem);
         analyser = audioCtx.createAnalyser();
+
         audioSrc.connect(analyser);
         audioSrc.connect(audioCtx.destination); //
 
         sampleMusicInfo.hidden = true
 
+        // Todo: need to fix audio clipping with subseqeuent number of file loads
 
       };
 

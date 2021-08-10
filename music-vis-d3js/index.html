@@ -74,7 +74,17 @@
                     </h2>
                     <div id="flush-c3" class="accordion-collapse collapse" aria-labelledby="flush-h3" >
                         <div class="accordion-body">
-                            <dd>This app uses Web Audio API which does not provide phase/angle information on the complex number output of FFT but magnitudes. Therefore fully reconstructing the decomposed frequency components into corresponding waveforms is not possible using this API alone. Meanwhile the amplitude of the decomposed waveforms shown are truthful to that of data, the slow standing-wave-like oscillations are arbitrary dynamics induced using <a href="https://en.wikipedia.org/wiki/Low-frequency_oscillation">Low Frequency Oscillators (LFO)</a> for aesthetics.</dd>
+                            Technical Limitations:
+                            <dd>
+                                This app uses Web Audio API which does not provide phase/angle information on the complex number output of FFT but magnitudes. Therefore fully reconstructing the decomposed frequency components into corresponding waveforms is not possible using this API alone. Meanwhile the amplitude of the decomposed waveforms shown are truthful to that of data, the slow standing-wave-like oscillations are arbitrary dynamics induced using <a href="https://en.wikipedia.org/wiki/Low-frequency_oscillation">Low Frequency Oscillators (LFO)</a> for aesthetics.
+                            </dd>
+                            Known Issues:
+                            <dd>
+                                Currently the audio starts clipping following subsequent loads of audio files.
+                            </dd>
+                            <dd>
+                                Volume buttons not working on mobile (android).
+                            </dd>
                         </div>
                     </div>
                 </div>
@@ -101,15 +111,20 @@
         </div>
 
 
-        <div id="sampleMusicInfo">
-            Sample Music: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a><br>
-            ... or ...
-        </div>
+
 
         <div id="fileInputArea" class="input-group input-group-sm mb-3">
             <!-- <label for="audioFileInput" class="input-group-text" >Load your own</label> -->
             <input id="audioFileInput" type="file" class="form-control form-control-sm" accept="audio/*">
         </div>
+
+        ... or ...<br>
+
+        <div id="sampleMusicInfo">
+            Sample Music: <a href="https://www.youtube.com/watch?v=cLX0cyh6_Ro">Kubbi - Up In My Jam (No Copyright Music)</a>
+        </div>
+
+        <br>
 
         <audio id="audioElem" src="./assets/kubbiJam.mp3" crossorigin="anonymous" ></audio>
         <div class="playerUI">

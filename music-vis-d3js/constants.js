@@ -11,8 +11,9 @@ const nDecomp = 15  // how many frequencies decomposed to actually plot.
 
 const fftWindowIdxs = [...Array(nFFT).keys()];
 
-const minDecibels = -100
-const maxDecibels = 0
+// default values known for the web audio API
+// const minDecibels = -100
+// const maxDecibels = 0
 
 // whether to omit first frequency bin (DC offset) or not.
 const omitDCFrqBin = true
