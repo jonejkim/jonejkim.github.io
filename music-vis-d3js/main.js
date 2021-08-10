@@ -7,10 +7,11 @@ $(document).ready(function () {
     let svg = ((parent, height, width) => {
             return d3.select('#musicVis').append('svg').attr({
                 'id' : "musicVisSvg",
-                // 'width': width,
-                // 'height': height,
+                // simple solution for responsive SVG rendering
                 'viewBox': "0 0 " + width + " " + height,
                 'preserveAspectRatio': "xMidYMid meet"
+                // 'width': width,
+                // 'height': height,
             });
         })('body', svgh, svgw)
 
@@ -48,57 +49,109 @@ $(document).ready(function () {
 
     //====[ masterVol ]====//
 
-    g_masterVol.append('rect')
-        .classed('masterVol', true)
+    // this is where the actual master volume is displayed
+    let masterVol_visual = g_masterVol.append('rect')
+        .classed('masterVol_visual', true)
         .datum(calculate_masterVol())
         .attr({
             'x': masterVolx,
-            'width': masterVolw,
             'y': masterVoly,
+            'width': masterVolw,
             'height': masterVolh,
+        })
+
+
+    // invisible rectangle occupying entire quadrant used for mouse hover
+    let masterVol_hover = g_masterVol.append('rect')
+        .classed('masterVol_hover', true)
+        .attr({
+            'width': masterVolw,
+            'height': masterVolh,
+            'pointer-events': 'all',
             'fill' : 'none'
         })
+        .on('mouseenter', makeMouseEnterFunc(g_masterVol, masterVolw, masterVolh, masterVol_hoverText))
+        .on('mouseleave', makeMouseLeaveFunc(g_masterVol))
+
+
 
     //====[ masterWav ]====//
 
-    g_masterWav.append('path')
+    // this is where the actual wave is displayed
+    let masterWav_visual = g_masterWav.append('path')
+        .classed('masterWav_visual', true)
         .datum(temporalData)
-        .classed('masterWav', true)
         .attr({
-            'x': 0,
             'width': masterWavw,
-            'y': 0,
             'height': masterWavh,
         })
+
+    // invisible rectangle occupying entire quadrant used for mouse hover
+    let masterWav_hover = g_masterWav.append('rect')
+        .classed('masterWav_hover', true)
+        .attr({
+            'width': masterWavw,
+            'height': masterWavh,
+            'pointer-events': 'all',
+            'fill' : 'none'
+        })
+        .on('mouseenter', makeMouseEnterFunc(g_masterWav, masterWavw, masterWavh, masterWav_hoverText))
+        .on('mouseleave', makeMouseLeaveFunc(g_masterWav))
+
 
 
     //====[ decompVol ]====//
 
-    g_decompVol.selectAll('rect')
+    // this is where the actual frequency spectrum is displayed
+    let decompVol_visual = g_decompVol.selectAll('rect')
         .data(frequencyData)
         .enter()
         .append('rect')
-        .classed('decompVol', true)
+        .classed('decompVol_visual', true)
         .attr({
             'x': (d) => {return decompVolw - (d/255)*decompVolw;},
-            'width': (d) => {return d;},
             'y': (d, idx) => idx * decompVol_barh,
+            'width': (d) => {return d;},
             'height': decompVol_barh,
         })
 
+    // invisible rectangle occupying entire quadrant used for mouse hover event
+    let decompVol_hover = g_decompVol.append('rect')
+        .classed('decompVol_hover', true)
+        .attr({
+            'width': decompVolw,
+            'height': decompVolh,
+            'pointer-events': 'all',
+            'fill' : 'none'
+        })
+        .on('mouseenter', makeMouseEnterFunc(g_decompVol, decompVolw, decompVolh, decompVol_hoverText))
+        .on('mouseleave', makeMouseLeaveFunc(g_decompVol))
+
+
     //====[ Decomposed Sinewave ]====//
 
-    g_decompWav.selectAll('path')
+    let decompWav_visual = g_decompWav.selectAll('path')
         .data(Array.from({length: nNyq}, (elem) => temporalData ))
         .enter()
         .append('path')
-        .classed('decompWav', true)
+        .classed('decompWav_visual', true)
         .attr({
             'x': 0,
-            'width': decompWavw,
             'y': (d, idx) => idx * decompWav_barh,
+            'width': decompWavw,
             'height': decompWav_barh,
         })
+
+    let decompWav_hover = g_decompWav.append('rect')
+        .classed('decompWav_hover', true)
+        .attr({
+            'width': decompWavw,
+            'height': decompWavh,
+            'pointer-events': 'all',
+            'fill' : 'none'
+        })
+        .on('mouseenter', makeMouseEnterFunc(g_decompWav, decompWavw, decompWavh, decompWav_hoverText))
+        .on('mouseleave', makeMouseLeaveFunc(g_decompWav))
 
 
     //==================================//
@@ -113,7 +166,7 @@ $(document).ready(function () {
 
         //====[ update masterVol ]====/
         let current_masterVol = calculate_masterVol()
-        g_masterVol.select('rect')
+        g_masterVol.select('.masterVol_visual , rect') // .select('rect')
             .datum(current_masterVol)
             .attr({
                 'x': (d) => {
@@ -132,7 +185,7 @@ $(document).ready(function () {
 
 
         //====[ update masterWav ]====//
-        g_masterWav.select('path')
+        g_masterWav.select('.masterWav_visual, path') // .select('path')
             .datum(pairStaticx2ys(temporalData))
             .attr({
                 'd' : masterWavLineFunc,
@@ -144,9 +197,8 @@ $(document).ready(function () {
 
 
         //====[ update decompVol ]====//
-        g_decompVol.selectAll('rect')
+        g_decompVol.selectAll('.decompVol_visual, rect')
             .data(frequencyData)
-            // d 패러미터는 각 data의 값인듯
             .attr({
                 'x': (d) => {
                     // return 0
@@ -162,8 +214,8 @@ $(document).ready(function () {
                 }
             })
 
-        //====[ update decompWav ]====//
-        g_decompWav.selectAll('path')
+            //====[ update decompWav ]====//
+            g_decompWav.selectAll('.decompWav_visual, path')
             .data(get_decompWavxys())
             .attr( {
                 'd' : (d, frqBin) => decompWavLineFuncs[frqBin](d),
@@ -187,60 +239,6 @@ $(document).ready(function () {
     //         }
     //     }
     // });
-
-
-    // if ($('#collapseTwo').attr('aria-expanded') == "false") {$('#collapseTwo').collapse('show');}
-
-
-    // $('#musicVisSvg').
-
-    // $('#explainBtn').click(function () {
-    //     // if ($('#explain').is( ":visible" )){
-    //         console.log('123123123')
-    //     if ($('#explainBtn').attr("aria-expanded") == 'true'){
-    //         svg.selectAll('.explainOverlay').remove()
-    //         console.log('456')
-
-    //     }else{
-    //         console.log('789')
-    //         svg.append('rect')
-    //             .classed('explainOverlay', true)
-    //             .attr({
-    //                 'x': 0,
-    //                 'y': 0,
-    //                 'width': svgw,
-    //                 'height': svgh,
-    //                 'fill' : 'rgba(255,255,255,0.1)'
-    //             })
-    //         g_masterVol.append('text')
-    //             .classed('explainOverlay', true)
-    //             .text('1')
-    //             .attr({
-    //                 'transform' : 'translate(' + masterVolw/2 + ', ' + masterVolh/2 + ')'
-    //             })
-    //         g_masterWav.append('text')
-    //             .classed('explainOverlay', true)
-    //             .text('2')
-    //             .attr({
-    //                 'transform' : 'translate(' + masterWavw/2 + ', ' + masterWavh/2 + ')'
-    //             })
-    //         g_decompVol.append('text')
-    //             .classed('explainOverlay', true)
-    //             .text('3')
-    //             .attr({
-    //                 'transform' : 'translate(' + decompVolw/2 + ', ' + decompVolh/2 + ')'
-    //             })
-    //         g_decompWav.append('text')
-    //             .classed('explainOverlay', true)
-    //             .text('4')
-    //             .attr({
-    //                 'transform' : 'translate(' + decompWavw/2 + ', ' + decompWavh/2 + ')'
-    //             })
-
-    //     }
-    // })
-
-
 
     $(document).on("mousedown", function(){
         // mitigation for chrome gesture warning "AudioContext was not allowed to start"

@@ -40,29 +40,46 @@ const svgh = document.getElementById("outermost").clientWidth
 //
 
 //====[ masterVol - top left quadrant ]====//
+
 // rest of the other quadrants soley depend on this quadrant.
+
+const masterVol_hoverText = "Total Volume (sum of signal values in DFT window)"
+
 const masterVolx = 0
 const masterVoly = 0
 const masterVolw = 0.5*svgw
 const masterVolh = 0.5*svgh
 
+
 //====[ masterWav - top right quadrant ]====//
+
+const masterWav_hoverText = "Time Domain Waveform (ie. original signal)"
+
 const masterWavx = masterVolx + masterVolw
 const masterWavy = 0
 const masterWavw = svgw - masterVolw
 const masterWavh = masterVolh
 
+
 //====[ decompVol - bottom left quadrant ]====//
+
+const decompVol_hoverText = "Decomposed Frequency Domain Spectrum (DFT result)"
+
 const decompVolx = 0
 const decompVoly = masterVoly + masterVolh
 const decompVolw = masterVolw
 const decompVolh = svgh - masterVolh
 
+
 //====[ decompWav - bottom right quadrant ]====//
+
+const decompWav_hoverText = "Decomposed Time Domain Waveform (ie. reconstructed)"
+
 const decompWavx = masterVolw
 const decompWavy = masterVolh
 const decompWavw = svgw - masterVolw
 const decompWavh = svgh - masterVolh
+
 
 
 //==================================//
