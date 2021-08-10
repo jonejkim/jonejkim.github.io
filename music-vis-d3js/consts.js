@@ -57,7 +57,7 @@ const masterVolh = 0.5*svgh
 
 //====[ masterWav - top right quadrant ]====//
 
-const masterWav_hoverText = "Time Domain Waveform <br> (ie. original signal)"
+const masterWav_hoverText = "Time Domain Waveform <br> (ie. original music signal)"
  // ["Time Domain Waveform", "(ie. original signal)"]
 
 const masterWavx = masterVolx + masterVolw
@@ -68,7 +68,7 @@ const masterWavh = masterVolh
 
 //====[ decompVol - bottom left quadrant ]====//
 
-const decompVol_hoverText = "Decomposed Frequency Domain Spectrum <br> (DFT result)"
+const decompVol_hoverText = "Decomposed Frequency Domain Spectrum <br> (ie. the DFT result)"
 // ["Decomposed Frequency Domain Spectrum", "(DFT result)"]
 
 const decompVolx = 0
@@ -79,7 +79,7 @@ const decompVolh = svgh - masterVolh
 
 //====[ decompWav - bottom right quadrant ]====//
 
-const decompWav_hoverText = "Decomposed Time Domain Waveform <br> (ie. reconstructed)"
+const decompWav_hoverText = "Decomposed Time Domain Waveform <br> (ie. reconstructed sinusoidals)"
 // ["Decomposed Time Domain Waveform", "(ie. reconstructed)"]
 
 const decompWavx = masterVolw
