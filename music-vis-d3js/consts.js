@@ -27,6 +27,9 @@ const cosinePhaseShift = useCosinePhaseShift? (Math.PI/2) : 0
 // 0 eliminates LFO effect
 const LFOSpeedFactor = 2.0
 
+// used for quadrant hover text wrapping. calculation for line height compensation
+const em2pxRatio = 17.6 // assuming body 16px for now - https://www.w3schools.com/tags/ref_pxtoemconversion.asp
+
 //==================================//
 // SVG
 //
@@ -43,7 +46,8 @@ const svgh = document.getElementById("outermost").clientWidth
 
 // rest of the other quadrants soley depend on this quadrant.
 
-const masterVol_hoverText = "Total Volume (sum of signal values in DFT window)"
+const masterVol_hoverText = "Total Volume <br> (sum of signal values in DFT window)"
+// ["Total Volume", "(sum of signal values in DFT window)"]
 
 const masterVolx = 0
 const masterVoly = 0
@@ -53,7 +57,8 @@ const masterVolh = 0.5*svgh
 
 //====[ masterWav - top right quadrant ]====//
 
-const masterWav_hoverText = "Time Domain Waveform (ie. original signal)"
+const masterWav_hoverText = "Time Domain Waveform <br> (ie. original signal)"
+ // ["Time Domain Waveform", "(ie. original signal)"]
 
 const masterWavx = masterVolx + masterVolw
 const masterWavy = 0
@@ -63,7 +68,8 @@ const masterWavh = masterVolh
 
 //====[ decompVol - bottom left quadrant ]====//
 
-const decompVol_hoverText = "Decomposed Frequency Domain Spectrum (DFT result)"
+const decompVol_hoverText = "Decomposed Frequency Domain Spectrum <br> (DFT result)"
+// ["Decomposed Frequency Domain Spectrum", "(DFT result)"]
 
 const decompVolx = 0
 const decompVoly = masterVoly + masterVolh
@@ -73,7 +79,8 @@ const decompVolh = svgh - masterVolh
 
 //====[ decompWav - bottom right quadrant ]====//
 
-const decompWav_hoverText = "Decomposed Time Domain Waveform (ie. reconstructed)"
+const decompWav_hoverText = "Decomposed Time Domain Waveform <br> (ie. reconstructed)"
+// ["Decomposed Time Domain Waveform", "(ie. reconstructed)"]
 
 const decompWavx = masterVolw
 const decompWavy = masterVolh

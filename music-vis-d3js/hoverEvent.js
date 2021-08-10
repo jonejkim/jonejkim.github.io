@@ -13,11 +13,8 @@ function makeMouseEnterFunc(g_quadrant, quadrantw, quadranth, hoverText){
                     'fill' : 'rgba(0,0,0,0.5)'
                 })
             g_quadrant.append('text')
-                .classed('hoverOverlayText', true)
-                .text(hoverText)
-                .attr({
-                    'transform' : 'translate(' + quadrantw/2 + ', ' + quadranth/2 + ')',
-                }).call(wrapText, quadrantw)
+            .classed('hoverOverlayText', true)
+            .text(hoverText).call(wrapText, quadrantw, quadranth)
         }
     }
     return mouseenter
@@ -34,10 +31,14 @@ function makeMouseLeaveFunc(g_quadrant){
     return mouseleave
 }
 
-// text wrapping function from : https://stackoverflow.com/a/41435258
-function wrapText(text, width) {
+// modified text wrapping function from:
+// - https://stackoverflow.com/a/41435258
+function wrapText(text, quadrantw, quadranth) {
     text.each(function() {
-      var text = d3.select(this),
+
+        //----[ text wrapping ]----//
+
+        let text = d3.select(this),
             words = text.text().split(/\s+/).reverse(),
             word,
             line = [],
@@ -46,15 +47,41 @@ function wrapText(text, width) {
             y = text.attr("y"),
             dy = parseFloat(text.attr("dy")),
             tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-      while (word = words.pop()) {
-        line.push(word);
-        tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > width) {
-            line.pop();
+
+        while (word = words.pop()) {
+            line.push(word);
             tspan.text(line.join(" "));
-            line = [word];
-            tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "em").text(word);
+
+            // use <br> as a special word to induce custom line breaks
+            if (word == '<br>'){
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [''];
+                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "em").text(word);
+                lineNumber++
+                continue
+            }
+
+            // actual text wrapping
+            if (tspan.node().getComputedTextLength() > quadrantw) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "em").text(word);
+                lineNumber++
+                continue
+            }
         }
-      }
+
+        //----[ place text in the center of quadrant ]----//
+
+        // line height compensation pixel value
+        // as with the original code the text position gets shifted downards as more lines are wrapped
+        let textHeightPxCompensator = lineNumber*lineHeight*em2pxRatio
+
+        text.attr({
+            'transform' : 'translate(' + quadrantw/2 + ', ' + (quadranth - textHeightPxCompensator)/2 + ')'
+        })
+
     });
   }

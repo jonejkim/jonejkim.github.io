@@ -22,7 +22,7 @@ body {
 }
 
 .hoverOverlayText{
-    font-size: xx-large;
+    font-size: large;
     text-anchor: middle;
     fill: white;
     /* stroke : white;
